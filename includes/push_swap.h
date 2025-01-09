@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
+/*   By: rboland <rboland@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:53:01 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/08 15:57:24 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/09 20:41:10 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,33 +21,9 @@ typedef struct s_stack
 	struct s_stack	*next;
 } t_stack;
 
-/*
-* =============================================================================
-* utils
-* -----------------------------------------------------------------------------
-*/
-void	free_stack(t_stack **stack);
-void	free_tab(char **tab);
-t_stack	*stack_last(t_stack *stack);
-void	stack_add_back(t_stack **stack, t_stack *new);
-t_stack	*stack_new_node(int nb);
-int	atoi_pushswap(const char *str);
-int	stack_init(t_stack **stack_a, char **a);
-int	is_valid_number(char *str);
-int	is_integer(char *str);
-int	finds_double(char *str);
+// utils 
 
-/*
-* =============================================================================
-* error
-* -----------------------------------------------------------------------------
-*/
-void	print_error(void);
-/* 
-* =============================================================================
-* stack operations
-* -----------------------------------------------------------------------------
-*/
+// stack operations
 void	swap_a(t_stack **stack_a);
 void	swap_b(t_stack **stack_b);
 void	swap_s(t_stack **stack_a, t_stack **stack_b);
