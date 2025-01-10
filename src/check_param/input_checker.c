@@ -3,25 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   input_checker.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rboland <rboland@student.s19.be>           +#+  +:+       +#+        */
+/*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:51:12 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/09 21:19:33 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/10 10:16:46 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-//
+// return 0 if more than one + or - is found, or if anything else than 
+// a number is found
 
 int	is_valid(char	*str)
 {
 	int	i;
 
 	i = 0;
-	if (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
+	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13)) // skip tab and space, there shouldnt be more than one bc split but you never know
 		i++;
-	if (str[i] == '-' || str[i] == '+')
+	if (str[i] == '-' || str[i] == '+') // skip only one + or - since more than one should be an Error
 		i++;
 	while (str)
 	{
