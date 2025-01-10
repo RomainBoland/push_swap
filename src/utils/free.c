@@ -6,11 +6,11 @@
 /*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 12:11:49 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/08 12:48:55 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/10 13:01:57 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../../includes/push_swap.h"
 
 void	free_stack(t_stack **stack)
 {

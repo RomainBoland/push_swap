@@ -6,11 +6,11 @@
 /*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:51:12 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/10 11:22:07 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/10 13:01:13 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../../includes/push_swap.h"
 
 // return 0 if more than one + or - is found, or if anything else than 
 // a number is found

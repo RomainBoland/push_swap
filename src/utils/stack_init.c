@@ -6,11 +6,11 @@
 /*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 13:17:31 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/10 12:01:12 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/10 13:02:03 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../../includes/push_swap.h"
 
 // search for the last node of a linked list and returns a pointer to it
 
@@ -56,6 +56,8 @@ t_stack	*stack_new_node(int nb)
 	new->next = NULL;
 	return (new);
 }
+
+// iterate over the whole stack and checks for each element->nb if it exist more than once
 
 int check_duplicates(t_stack **stack)
 {

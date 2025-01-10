@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rboland <rboland@student.s19.be>           +#+  +:+       +#+        */
+/*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:52:42 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/02 09:52:42 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/10 13:01:41 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../../includes/push_swap.h"
 /*
 * fonction generique pour envoyer le premier element d une stack src vers
 * le debut de la stack dest

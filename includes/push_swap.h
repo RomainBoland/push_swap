@@ -6,7 +6,7 @@
 /*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:53:01 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/10 11:46:27 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/10 13:30:14 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,16 @@ int	is_valid(char	*str);
 int	is_integer(long nb);
 int	atoi_push_swap(const char *str);
 int	input_checker(char **tab);
-int	input_format(int argc, char **argv, t_stack *stack_a);
+int	input_formater(int argc, char **argv, t_stack **stack_a);
 
 // utils 
+void	print_error(void);
 void	free_stack(t_stack **stack);
 void	free_tab(char **tab);
 t_stack	*stack_last(t_stack *stack);
 void	stack_add_back(t_stack **stack, t_stack *new);
 t_stack	*stack_new_node(int nb);
+int check_duplicates(t_stack **stack);
 int	stack_init(t_stack **stack_a, char **av);
 
 // stack operations
