@@ -6,7 +6,7 @@
 /*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 13:17:31 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/10 11:27:54 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/10 11:57:05 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,14 @@ int	stack_init(t_stack **stack_a, char **av)
 	while (av[i])
 	{
 		nb = atoi_push_swap(av[i]);
+		new_node = stack_new_node((int)nb);
+		if (!new_node)
+			return (0);
+		if (*stack_a)
+			stack_add_back(stack_a, new_node);
+		else
+			*stack_a = new_node;
+		i++;
 	}
-	
+	return (1);
 }
