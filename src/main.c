@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rboland <rboland@student.s19.be>           +#+  +:+       +#+        */
+/*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 21:23:19 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/09 21:06:59 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/10 11:26:33 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,11 @@ int	main(int argc, char *argv[])
 	stack_b = NULL;
 	if (argc == 1 || argv[1][0] == NULL)
 		return (0);
-	input_formater(argc, argv, stack_a); // format one long string of args into multiple args and calls stack_init
+	if (input_formater(argc, argv, stack_a))
+	{
+		print_error();
+		return (0);
+	} // format one long string of args into multiple args and calls stack_init
 	sort_stack();
 	free_stack(stack_a);
 	return (0);

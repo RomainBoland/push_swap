@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rboland <rboland@student.s19.be>           +#+  +:+       +#+        */
+/*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 13:17:31 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/09 20:33:36 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/10 11:27:54 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,14 @@ int	stack_init(t_stack **stack_a, char **av)
 {
 	int		i;
 	t_stack	*new_node;
-	int		nb;
+	long	nb;
 
+	i = 0;
+	if (!input_checker(av))
+		return (0);
+	while (av[i])
+	{
+		nb = atoi_push_swap(av[i]);
+	}
 	
 }

@@ -6,7 +6,7 @@
 /*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:51:12 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/10 10:16:46 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/10 11:22:07 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	is_valid(char	*str)
 		i++;
 	if (str[i] == '-' || str[i] == '+') // skip only one + or - since more than one should be an Error
 		i++;
-	while (str)
+	while (str[i])
 	{
 		if (str[i] >= '0' && str[i] <= '9')
 			i++;
@@ -83,4 +83,5 @@ int	input_checker(char **tab)
 			return (0);
 		i++;
 	}
+	return (1);
 }
