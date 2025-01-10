@@ -11,30 +11,40 @@ SRC_DIRS = src/check_param \
            src/utils
 
 # Get all .c files from each directory
-SRC = $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c)) \
+SRCS = $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c)) \
       main.c
 
-# Create object files in same directory structure
-OBJ = $(SRC:.c=.o)
+# Create object files in obj directory
+OBJ_DIR = obj/
+OBJS = $(SRCS:%.c=$(OBJ_DIR)%.o)
+
+# Create directories for object files
+OBJ_DIRS = $(OBJ_DIR) $(addprefix $(OBJ_DIR),$(SRC_DIRS))
 
 LIBFT_DIR = libft/
 LIBFT = $(LIBFT_DIR)libft.a
 
-all: $(LIBFT) $(NAME)
+all: $(OBJ_DIRS) $(LIBFT) $(NAME)
+
+# Create object directories
+$(OBJ_DIRS):
+	mkdir -p $@
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
-$(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJ) $(LIBFT)
+# Link program
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $^ $(LIBFT)
 
-# Rule to compile .c files into .o files
-%.o: %.c includes/push_swap.h
+# Compile source files
+$(OBJ_DIR)%.o: %.c includes/push_swap.h
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
-	rm -f $(OBJ)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	$(MAKE) -C $(LIBFT_DIR) fclean

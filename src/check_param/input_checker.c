@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   input_checker.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
+/*   By: rboland <rboland@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:51:12 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/10 13:01:13 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/10 21:40:14 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
-
 // return 0 if more than one + or - is found, or if anything else than 
 // a number is found
 
-int	is_valid(char	*str)
+static int	is_valid(char	*str)
 {
 	int	i;
 
@@ -34,38 +33,52 @@ int	is_valid(char	*str)
 	return (1);
 }
 
-int	is_integer(long nb)
+static int check_overflow(long result, char next_digit, int sign)
 {
-	if (nb >= -2147483648 && nb <= 2147483647)
-		return (1);
-	else
-		return (0);
+    if (result > 214748364)
+        return (1);
+    if (result == 214748364)
+    {
+        if (sign == 1 && (next_digit - '0') > 7)
+            return (1);
+        if (sign == -1 && (next_digit - '0') > 8)
+            return (1);
+    }
+    return (0);
 }
 
-int	atoi_push_swap(const char *str)
+static long get_overflow_value(int sign)
 {
-	int		i;
-	long	result;
-	int		sign;
+    if (sign == 1)
+        return (2147483648);
+    return (-2147483649);
+}
 
-	result = 0;
-	sign = 1;
-	i = 0;
-	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
-		i++;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign = -1;
-		i++;
-	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		result = (result * 10) + (str[i] - '0');
-		i++;
-	}
-	result = result * sign;
-	return (result);
+long    atoi_push_swap(const char *str)
+{
+    int     i;
+    long    result;
+    int     sign;
+
+    result = 0;
+    sign = 1;
+    i = 0;
+    while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
+        i++;
+    if (str[i] == '-' || str[i] == '+')
+    {
+        if (str[i] == '-')
+            sign = -1;
+        i++;
+    }
+    while (str[i] >= '0' && str[i] <= '9')
+    {
+        if (check_overflow(result, str[i], sign))
+            return (get_overflow_value(sign));
+        result = (result * 10) + (str[i] - '0');
+        i++;
+    }
+    return (result * sign);
 }
 
 int	input_checker(char **tab)
@@ -79,7 +92,7 @@ int	input_checker(char **tab)
 		if (!is_valid(tab[i]))
 			return (0);
 		nb = atoi_push_swap(tab[i]);
-		if (!is_integer(nb))
+		if (nb < -2147483648 || nb > 2147483647)
 			return (0);
 		i++;
 	}
