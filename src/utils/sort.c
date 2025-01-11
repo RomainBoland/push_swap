@@ -6,11 +6,35 @@
 /*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 10:03:36 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/11 10:32:00 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/11 11:52:20 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
+
+void sort_five(t_stack **stack_a, t_stack **stack_b)
+{
+    int min_pos;
+    
+    while (stack_size(*stack_a) > 3)
+    {
+        min_pos = get_min_position(*stack_a);
+        if (min_pos <= stack_size(*stack_a) / 2)
+        {
+            while (min_pos-- > 0)
+                rotate_a(stack_a);
+        }
+        else
+        {
+            while (min_pos++ < stack_size(*stack_a))
+                r_rotate_a(stack_a);
+        }
+        push_b(stack_a, stack_b);
+    }
+    sort_three(stack_a);
+    while (*stack_b)
+        push_a(stack_a, stack_b);
+}
 
 void	sort_three(t_stack **stack_a)
 {
@@ -60,8 +84,8 @@ void	sort_stack(t_stack **stack_a, t_stack **stack_b)
 		sort_two(stack_a);
 	if (size == 3)
 		sort_three(stack_a);
-	// if (size <= 5)
-	// 	sort_five(stack_a, stack_b);
+	if (size <= 5)
+		sort_five(stack_a, stack_b);
 	// else
 	// 	sort_large(stack_a, stack_b);
 }
