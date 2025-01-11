@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_checker.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rboland <rboland@student.s19.be>           +#+  +:+       +#+        */
+/*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:51:12 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/10 21:40:14 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/11 09:51:04 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ static int	is_valid(char	*str)
 	}
 	return (1);
 }
+
+// Compare the result of atoi with maxInt/10, if higher, checks if another next digit exist, and if its the case
+// it checks if its higher than maxInt%10. This is an easy way to prevent stackoverlow.
 
 static int check_overflow(long result, char next_digit, int sign)
 {

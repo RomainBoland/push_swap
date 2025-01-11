@@ -4,47 +4,43 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 INCLUDES = -I includes/ -I libft/includes/
 
-# Source directories
-SRC_DIRS = src/check_param \
-           src/error_handling \
-           src/stack_ops \
-           src/utils
+# List all source files explicitly
+SRC_CHECK = src/check_param/input_checker.c \
+            src/check_param/input_formater.c \
+            # Add other check_param files
 
-# Get all .c files from each directory
-SRCS = $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c)) \
-      main.c
+SRC_ERROR = src/error_handling/error.c \
+            # Add other error handling files
 
-# Create object files in obj directory
-OBJ_DIR = obj/
-OBJS = $(SRCS:%.c=$(OBJ_DIR)%.o)
+SRC_STACK = src/stack_ops/push.c \
+            src/stack_ops/swap.c \
+            src/stack_ops/rotate.c \
+			src/stack_ops/reverse_rotate.c
 
-# Create directories for object files
-OBJ_DIRS = $(OBJ_DIR) $(addprefix $(OBJ_DIR),$(SRC_DIRS))
+SRC_UTILS = src/utils/free.c \
+			src/utils/stack_init.c 
+            # Add other utility files
+
+SRC = $(SRC_CHECK) $(SRC_ERROR) $(SRC_STACK) $(SRC_UTILS) main.c
+OBJ = $(SRC:.c=.o)
 
 LIBFT_DIR = libft/
 LIBFT = $(LIBFT_DIR)libft.a
 
-all: $(OBJ_DIRS) $(LIBFT) $(NAME)
-
-# Create object directories
-$(OBJ_DIRS):
-	mkdir -p $@
+all: $(LIBFT) $(NAME)
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
-# Link program
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $^ $(LIBFT)
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJ) $(LIBFT)
 
-# Compile source files
-$(OBJ_DIR)%.o: %.c includes/push_swap.h
-	@mkdir -p $(dir $@)
+%.o: %.c includes/push_swap.h
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
-	rm -rf $(OBJ_DIR)
+	rm -f $(OBJ)
 
 fclean: clean
 	$(MAKE) -C $(LIBFT_DIR) fclean
