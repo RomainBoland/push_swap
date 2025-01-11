@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rboland <rboland@student.s19.be>           +#+  +:+       +#+        */
+/*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:53:01 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/10 21:30:01 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/11 10:02:28 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ typedef struct s_stack
 
 // check_param
 long	atoi_push_swap(const char *str);
-int	input_checker(char **tab);
-int	input_formater(int argc, char **argv, t_stack **stack_a);
+int		input_checker(char **tab);
+int		input_formater(int argc, char **argv, t_stack **stack_a);
 
 // utils 
 void	print_error(void);
@@ -33,8 +33,11 @@ void	free_tab(char **tab);
 t_stack	*stack_last(t_stack *stack);
 void	stack_add_back(t_stack **stack, t_stack *new);
 t_stack	*stack_new_node(int nb);
-int check_duplicates(t_stack **stack);
-int	stack_init(t_stack **stack_a, char **av);
+int 	check_duplicates(t_stack **stack);
+int		stack_init(t_stack **stack_a, char **av);
+int	stack_size(t_stack *stack);
+int	is_sorted(t_stack *stack);
+
 
 // stack operations
 void	swap_a(t_stack **stack_a);
