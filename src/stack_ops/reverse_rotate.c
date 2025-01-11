@@ -6,11 +6,13 @@
 /*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 13:13:28 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/10 13:06:12 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/11 10:22:05 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
+
+// rotate last element to first place
 
 static void r_rotate_stack(t_stack **stack)
 {

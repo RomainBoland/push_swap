@@ -6,7 +6,7 @@
 /*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:53:01 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/11 10:02:28 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/11 10:23:11 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ int 	check_duplicates(t_stack **stack);
 int		stack_init(t_stack **stack_a, char **av);
 int	stack_size(t_stack *stack);
 int	is_sorted(t_stack *stack);
-
+void	sort_two(t_stack **stack_a);
+void	sort_three(t_stack **stack_a);
+void	sort_stack(t_stack **stack_a, t_stack **stack_b);
 
 // stack operations
 void	swap_a(t_stack **stack_a);

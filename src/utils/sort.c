@@ -6,7 +6,7 @@
 /*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 10:03:36 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/11 10:19:52 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/11 10:32:00 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,19 @@ void	sort_two(t_stack **stack_a)
 void	sort_stack(t_stack **stack_a, t_stack **stack_b)
 {
 	int size;
+	(void) stack_b;
 
 	if (!stack_a || !*stack_a)
 		return ;
 	size = stack_size(*stack_a);
-	if (is_sorted(*stack_a));
+	if (is_sorted(*stack_a))
 		return ;
 	if (size == 2)
 		sort_two(stack_a);
 	if (size == 3)
 		sort_three(stack_a);
-	if (size <= 5)
-		sort_five(stack_a, stack_b);
-	else
-		sort_large(stack_a, stack_b);
-		
+	// if (size <= 5)
+	// 	sort_five(stack_a, stack_b);
+	// else
+	// 	sort_large(stack_a, stack_b);
 }
