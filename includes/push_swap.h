@@ -6,7 +6,7 @@
 /*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:53:01 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/11 11:44:33 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/11 15:22:36 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 typedef struct s_stack
 {
+	int				index;
 	int				nb;
 	struct s_stack	*next;
 } t_stack;
@@ -42,6 +43,9 @@ void	sort_three(t_stack **stack_a);
 void	sort_stack(t_stack **stack_a, t_stack **stack_b);
 int 	get_min_position(t_stack *stack);
 void	sort_five(t_stack **stack_a, t_stack **stack_b);
+void sort_large(t_stack **stack_a, t_stack **stack_b);
+void index_stack(t_stack **stack);
+int get_max(t_stack *stack);
 
 // stack operations
 void	swap_a(t_stack **stack_a);

@@ -6,7 +6,7 @@
 /*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 10:03:36 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/11 11:52:20 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/11 15:19:42 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,6 @@ void	sort_stack(t_stack **stack_a, t_stack **stack_b)
 		sort_three(stack_a);
 	if (size <= 5)
 		sort_five(stack_a, stack_b);
-	// else
-	// 	sort_large(stack_a, stack_b);
+	else
+		sort_large(stack_a, stack_b);
 }

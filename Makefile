@@ -20,7 +20,8 @@ SRC_STACK = src/stack_ops/push.c \
 SRC_UTILS = src/utils/free.c \
 			src/utils/stack_init.c \
 			src/utils/sort_utils.c \
-			src/utils/sort.c
+			src/utils/sort.c \
+			src/utils/sort_large.c
             # Add other utility files
 
 SRC = $(SRC_CHECK) $(SRC_ERROR) $(SRC_STACK) $(SRC_UTILS) main.c
