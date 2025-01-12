@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
+/*   By: rboland <rboland@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 10:03:36 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/11 15:19:42 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/12 14:53:13 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,11 @@ void	sort_stack(t_stack **stack_a, t_stack **stack_b)
 	size = stack_size(*stack_a);
 	if (is_sorted(*stack_a))
 		return ;
-	if (size == 2)
+	else if (size == 2)
 		sort_two(stack_a);
-	if (size == 3)
+	else if (size == 3)
 		sort_three(stack_a);
-	if (size <= 5)
+	else if (size <= 5)
 		sort_five(stack_a, stack_b);
 	else
 		sort_large(stack_a, stack_b);

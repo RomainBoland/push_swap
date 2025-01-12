@@ -3,55 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   sort_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
+/*   By: rboland <rboland@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 09:58:21 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/11 15:21:53 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/12 15:02:48 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
-
-// Get the maximum number in the stack
-int get_max(t_stack *stack)
-{
-    int max;
-    
-    if (!stack)
-        return (0);
-    max = stack->nb;
-    while (stack)
-    {
-        if (stack->nb > max)
-            max = stack->nb;
-        stack = stack->next;
-    }
-    return (max);
-}
-
-void index_stack(t_stack **stack)
-{
-    t_stack *current;
-    t_stack *compare;
-    int index;
-    
-    current = *stack;
-    while (current)
-    {
-        index = 0;
-        compare = *stack;
-        while (compare)
-        {
-            if (compare->nb < current->nb)
-                index++;
-            compare = compare->next;
-        }
-        current->index = index;
-        current = current->next;
-    }
-}
-
-// returns the size of the stack
 
 int	stack_size(t_stack *stack)
 {
