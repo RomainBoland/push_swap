@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
+/*   By: rboland <rboland@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 21:23:19 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/11 15:28:22 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/12 16:33:04 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-// static void    print_stack(t_stack **stack_a)
-// {
-//     int i = 0;
-//     t_stack *current = NULL;
-//     current = *stack_a;
-//     while (current)
-//     {
-//         ft_printf("Stack (%d)->nb = %d\n", i, current->nb);
-//         i++;
-//         current = current->next;
-//     }
-// }
+static void    print_stack(t_stack **stack_a)
+{
+    int i = 0;
+    t_stack *current = NULL;
+    current = *stack_a;
+    while (current)
+    {
+        ft_printf("Stack (%d)->nb = %d\n", i, current->nb);
+        i++;
+        current = current->next;
+    }
+}
 
 int main(int argc, char *argv[])
 {
@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
         return (1);
     }
     sort_stack(&stack_a, &stack_b); // Pass both stacks
-    // print_stack(&stack_a);
+    print_stack(&stack_a);
     free_stack(&stack_a);
     free_stack(&stack_b);
     return (0);

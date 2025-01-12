@@ -6,7 +6,7 @@
 /*   By: rboland <rboland@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:53:01 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/12 15:07:13 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/12 16:26:08 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,13 @@
 
 typedef struct s_stack
 {
-	int				index;
-	int				nb;
-	struct s_stack	*next;
+    int             nb;
+    int             index;      // for final sorted position
+    int             pos;        // current position in stack
+    int             target_pos; // where it needs to go
+    int             cost_a;     
+    int             cost_b;
+    struct s_stack  *next;
 } t_stack;
 
 // check_param
@@ -52,12 +56,18 @@ void	sort_two(t_stack **stack_a);
 void	sort_three(t_stack **stack_a);
 void	sort_stack(t_stack **stack_a, t_stack **stack_b);
 
-// sort_large_utils.c
+// sort_large_moves.c
+t_stack *get_cheapest(t_stack **b);
+void do_move(t_stack **a, t_stack **b, int cost_a, int cost_b);
 
+// sort_large_utils.c
+void get_position(t_stack **stack);
+int get_target_pos(t_stack **a, int b_idx);
+void get_cost(t_stack **a, t_stack **b);
+void index_stack(t_stack **stack);
 
 // sort_large.c
 void 	sort_large(t_stack **stack_a, t_stack **stack_b);
-
 
 // stack operations
 void	swap_a(t_stack **stack_a);
