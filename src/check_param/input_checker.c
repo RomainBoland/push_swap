@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   input_checker.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
+/*   By: rboland <rboland@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:51:12 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/13 15:19:06 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/13 21:40:44 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
-
-// return 0 if more than one + or - is found, or if anything else than
-// a number is found
 
 static int	is_valid(char *str)
 {
@@ -22,7 +19,8 @@ static int	is_valid(char *str)
 	i = 0;
 	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
 		i++;
-	if (str[i] == '-' || str[i] == '+')
+	if ((str[i] == '-' || str[i] == '+')
+		&& (str[i + 1] >= '0' && str[i + 1] <= '9'))
 		i++;
 	while (str[i])
 	{
