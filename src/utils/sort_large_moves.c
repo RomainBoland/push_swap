@@ -2,19 +2,15 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   sort_large_moves.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+        
-	+:+     */
-/*   By: rboland <rboland@student.s19.be>           +#+  +:+      
-	+#+        */
-/*                                                +#+#+#+#+#+  
-	+#+           */
-/*   Created: 2025/01/12 16:30:54 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/12 16:30:54 by rboland          ###   ########.fr       */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rboland <rboland@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/13 20:39:08 by rboland           #+#    #+#             */
+/*   Updated: 2025/01/13 20:39:08 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
-
 
 static void	rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
 {
@@ -58,7 +54,6 @@ void	finish_rotation(t_stack **stack, t_stack *top_node, char stack_name)
 	}
 }
 
-// Finds and returns the cheapest node in stack b
 t_stack	*get_cheapest_node(t_stack *stack)
 {
 	if (!stack)
@@ -74,14 +69,14 @@ t_stack	*get_cheapest_node(t_stack *stack)
 
 void	move_nodes(t_stack **a, t_stack **b)
 {
-	t_stack *cheapest_node;
+	t_stack	*cheapest_node;
 
 	cheapest_node = get_cheapest_node(*b);
 	if (cheapest_node->above_medium
 		&& cheapest_node->target_node->above_medium)
 		rotate_both(a, b, cheapest_node);
 	else if (!cheapest_node->above_medium
-			&& !cheapest_node->target_node->above_medium)
+		&& !cheapest_node->target_node->above_medium)
 		reverse_rotate_both(a, b, cheapest_node);
 	finish_rotation(b, cheapest_node, 'b');
 	finish_rotation(a, cheapest_node->target_node, 'a');

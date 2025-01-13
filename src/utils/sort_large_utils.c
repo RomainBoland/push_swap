@@ -12,11 +12,10 @@
 
 #include "../../includes/push_swap.h"
 
-
 void	set_current_position(t_stack *stack)
 {
-	int i;
-	int centerline;
+	int	i;
+	int	centerline;
 
 	i = 0;
 	if (!stack)
@@ -31,28 +30,37 @@ void	set_current_position(t_stack *stack)
 	}
 }
 
+static t_stack	*find_target_match(
+		t_stack *a, t_stack *b, long *best_match_index)
+{
+	t_stack	*current_a;
+	t_stack	*target_node;
+
+	*best_match_index = LONG_MAX;
+	current_a = a;
+	while (current_a)
+	{
+		if (current_a->nb > b->nb && current_a->nb < *best_match_index)
+		{
+			*best_match_index = current_a->nb;
+			target_node = current_a;
+		}
+		current_a = current_a->next;
+	}
+	return (target_node);
+}
+
 static void	set_target_node(t_stack *a, t_stack *b)
 {
-	t_stack *current_a;
-	t_stack *target_node;
-	long best_match_index;
+	long	best_match_index;
+	t_stack	*target_node;
+	t_stack	*current_a;
 
 	while (b)
 	{
-		best_match_index = LONG_MAX;
-		current_a = a;
-		while (current_a)
-		{
-			if (current_a->nb > b->nb && current_a->nb < best_match_index)
-			{
-				best_match_index = current_a->nb;
-				target_node = current_a;
-			}
-			current_a = current_a->next;
-		}
+		target_node = find_target_match(a, b, &best_match_index);
 		if (best_match_index == LONG_MAX)
 		{
-			// Find smallest in a as target
 			b->target_node = a;
 			current_a = a->next;
 			while (current_a)
@@ -68,30 +76,10 @@ static void	set_target_node(t_stack *a, t_stack *b)
 	}
 }
 
-void	set_price(t_stack *a, t_stack *b)
-{
-	int len_a;
-	int len_b;
-
-	len_a = stack_size(a);
-	len_b = stack_size(b);
-	while (b)
-	{
-		b->push_price = b->current_pos;
-		if (!b->above_medium)
-			b->push_price = len_b - b->current_pos;
-		if (b->target_node->above_medium)
-			b->push_price += b->target_node->current_pos;
-		else
-			b->push_price += len_a - b->target_node->current_pos;
-		b = b->next;
-	}
-}
-
 void	set_cheapest(t_stack *b)
 {
-	t_stack *current;
-	long min_price;
+	t_stack	*current;
+	long	min_price;
 
 	if (!b)
 		return ;

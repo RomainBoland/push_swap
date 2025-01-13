@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
+/*   By: rboland <rboland@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 10:03:36 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/13 15:17:36 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/13 20:27:35 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,7 @@ void	sort_two(t_stack **stack_a)
 
 void	sort_stack(t_stack **stack_a, t_stack **stack_b)
 {
-	int size;
-	(void)stack_b;
+	int	size;
 
 	if (!stack_a || !*stack_a)
 		return ;

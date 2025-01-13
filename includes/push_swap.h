@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
+/*   By: rboland <rboland@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:53:01 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/13 15:19:23 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/13 20:44:24 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void				free_stack(t_stack **stack);
 void				free_tab(char **tab);
 
 // sort_utils.c
+void				set_price(t_stack *a, t_stack *b);
 int					stack_size(t_stack *stack);
 int					is_sorted(t_stack *stack);
 int					get_min_position(t_stack *stack);
@@ -66,7 +67,6 @@ void				finish_rotation(t_stack **stack, t_stack *top_node,
 
 // sort_large_utils.c
 void				set_current_position(t_stack *stack);
-void				set_price(t_stack *a, t_stack *b);
 void				set_cheapest(t_stack *b);
 void				init_nodes(t_stack *a, t_stack *b);
 

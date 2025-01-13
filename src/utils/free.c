@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
+/*   By: rboland <rboland@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 12:11:49 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/13 15:17:52 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/13 20:26:00 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	free_stack(t_stack **stack)
 
 void	free_tab(char **tab)
 {
-	size_t i;
+	size_t	i;
 
 	if (!tab)
 		return ;

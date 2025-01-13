@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   sort_large.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
+/*   By: rboland <rboland@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:20:20 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/13 15:17:43 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/13 20:38:59 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-// Finds the smallest value in the stack
 static t_stack	*find_smallest(t_stack *stack)
 {
 	t_stack	*smallest_node;
@@ -33,7 +32,6 @@ static t_stack	*find_smallest(t_stack *stack)
 	return (smallest_node);
 }
 
-// Handle sorting for exactly 5 numbers
 static void	handle_five(t_stack **a, t_stack **b)
 {
 	int	len_a;
@@ -52,11 +50,9 @@ static void	handle_five(t_stack **a, t_stack **b)
 	}
 }
 
-// Main sorting algorithm for large stacks
-void	sort_large(t_stack **a, t_stack **b)
+static void	sort_initial_large(t_stack **a, t_stack **b)
 {
-	t_stack	*smallest;
-	int		len_a;
+	int	len_a;
 
 	len_a = stack_size(*a);
 	if (len_a == 5)
@@ -64,21 +60,23 @@ void	sort_large(t_stack **a, t_stack **b)
 		handle_five(a, b);
 		return ;
 	}
-	// Push everything except 3 numbers to stack b
 	while (len_a > 3)
 	{
 		push_b(a, b);
 		len_a--;
 	}
-	// Sort the remaining 3 numbers in stack a
 	sort_three(a);
-	// Start the main sorting process
 	while (*b)
 	{
 		init_nodes(*a, *b);
 		move_nodes(a, b);
 	}
-	// After all numbers are pushed back to a, rotate to put smallest at top
+}
+
+static void	position_smallest(t_stack **a)
+{
+	t_stack	*smallest;
+
 	set_current_position(*a);
 	smallest = find_smallest(*a);
 	if (smallest->above_medium)
@@ -91,4 +89,10 @@ void	sort_large(t_stack **a, t_stack **b)
 		while (*a != smallest)
 			r_rotate_a(a);
 	}
+}
+
+void	sort_large(t_stack **a, t_stack **b)
+{
+	sort_initial_large(a, b);
+	position_smallest(a);
 }
