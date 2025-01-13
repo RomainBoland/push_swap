@@ -6,22 +6,23 @@
 /*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:51:12 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/11 09:51:04 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/13 15:19:06 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
-// return 0 if more than one + or - is found, or if anything else than 
+
+// return 0 if more than one + or - is found, or if anything else than
 // a number is found
 
-static int	is_valid(char	*str)
+static int	is_valid(char *str)
 {
 	int	i;
 
 	i = 0;
-	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13)) // skip tab and space, there shouldnt be more than one bc split but you never know
+	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
 		i++;
-	if (str[i] == '-' || str[i] == '+') // skip only one + or - since more than one should be an Error
+	if (str[i] == '-' || str[i] == '+')
 		i++;
 	while (str[i])
 	{
@@ -33,55 +34,52 @@ static int	is_valid(char	*str)
 	return (1);
 }
 
-// Compare the result of atoi with maxInt/10, if higher, checks if another next digit exist, and if its the case
-// it checks if its higher than maxInt%10. This is an easy way to prevent stackoverlow.
-
-static int check_overflow(long result, char next_digit, int sign)
+static int	check_overflow(long result, char next_digit, int sign)
 {
-    if (result > 214748364)
-        return (1);
-    if (result == 214748364)
-    {
-        if (sign == 1 && (next_digit - '0') > 7)
-            return (1);
-        if (sign == -1 && (next_digit - '0') > 8)
-            return (1);
-    }
-    return (0);
+	if (result > 214748364)
+		return (1);
+	if (result == 214748364)
+	{
+		if (sign == 1 && (next_digit - '0') > 7)
+			return (1);
+		if (sign == -1 && (next_digit - '0') > 8)
+			return (1);
+	}
+	return (0);
 }
 
-static long get_overflow_value(int sign)
+static long	get_overflow_value(int sign)
 {
-    if (sign == 1)
-        return (2147483648);
-    return (-2147483649);
+	if (sign == 1)
+		return (2147483648);
+	return (-2147483649);
 }
 
-long    atoi_push_swap(const char *str)
+long	atoi_push_swap(const char *str)
 {
-    int     i;
-    long    result;
-    int     sign;
+	int		i;
+	long	result;
+	int		sign;
 
-    result = 0;
-    sign = 1;
-    i = 0;
-    while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
-        i++;
-    if (str[i] == '-' || str[i] == '+')
-    {
-        if (str[i] == '-')
-            sign = -1;
-        i++;
-    }
-    while (str[i] >= '0' && str[i] <= '9')
-    {
-        if (check_overflow(result, str[i], sign))
-            return (get_overflow_value(sign));
-        result = (result * 10) + (str[i] - '0');
-        i++;
-    }
-    return (result * sign);
+	result = 0;
+	sign = 1;
+	i = 0;
+	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign = -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		if (check_overflow(result, str[i], sign))
+			return (get_overflow_value(sign));
+		result = (result * 10) + (str[i] - '0');
+		i++;
+	}
+	return (result * sign);
 }
 
 int	input_checker(char **tab)

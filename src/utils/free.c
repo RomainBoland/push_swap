@@ -6,7 +6,7 @@
 /*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 12:11:49 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/10 13:01:57 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/13 15:17:52 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	free_stack(t_stack **stack)
 {
-	t_stack *current;
-	t_stack *next;
-	
+	t_stack	*current;
+	t_stack	*next;
+
 	if (!stack || !*stack)
 		return ;
 	current = *stack;
@@ -31,10 +31,10 @@ void	free_stack(t_stack **stack)
 
 void	free_tab(char **tab)
 {
-	size_t	i;
+	size_t i;
 
 	if (!tab)
-		return;
+		return ;
 	i = 0;
 	while (tab[i])
 	{

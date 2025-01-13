@@ -6,7 +6,7 @@
 /*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:49:47 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/10 13:01:52 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/13 15:17:58 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 */
 static void	stackswap(t_stack **stack)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	if (!stack || !(*stack) || !(*stack)->next)
 		return ;

@@ -6,7 +6,7 @@
 /*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 13:13:28 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/11 10:22:05 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/13 15:18:05 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 // rotate last element to first place
 
-static void r_rotate_stack(t_stack **stack)
+static void	r_rotate_stack(t_stack **stack)
 {
-    t_stack *last;
-    t_stack *prev_last;
+	t_stack	*last;
+	t_stack	*prev_last;
 
-    if (!stack || !*stack || !(*stack)->next)
-        return;
-    prev_last = NULL;
-    last = *stack;
-    while (last->next != NULL)
-    {
-        prev_last = last;
-        last = last->next;
-    }
-    last->next = *stack;
-    *stack = last;
-    prev_last->next = NULL; 
+	if (!stack || !*stack || !(*stack)->next)
+		return ;
+	prev_last = NULL;
+	last = *stack;
+	while (last->next != NULL)
+	{
+		prev_last = last;
+		last = last->next;
+	}
+	last->next = *stack;
+	*stack = last;
+	prev_last->next = NULL;
 }
 
 void	r_rotate_a(t_stack **stack_a)

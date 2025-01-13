@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_formater.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rboland <rboland@student.s19.be>           +#+  +:+       +#+        */
+/*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/09 20:29:29 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/09 20:29:29 by rboland          ###   ########.fr       */
+/*   Created: 2025/01/13 15:20:13 by rboland           #+#    #+#             */
+/*   Updated: 2025/01/13 15:20:13 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@
 
 int	input_formater(int argc, char **argv, t_stack **stack_a)
 {
-	char	**av;
+	char **av;
 
 	if (argc == 2)
 	{
-		av = ft_split(argv[1], ' '); 
+		av = ft_split(argv[1], ' ');
 		if (!stack_init(stack_a, av))
 			return (0);
 		free_tab(av); // must be free bc split malloc the tab
 	}
 	else
 	{
-		av = argv + 1; // Dans le cas d un tableau ou les differents elements sont deja separer
+		av = argv + 1;
 		if (!stack_init(stack_a, av))
 			return (0);
 	}

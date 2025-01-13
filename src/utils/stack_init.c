@@ -6,7 +6,7 @@
 /*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 13:17:31 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/10 13:02:03 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/13 15:23:30 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,26 +57,24 @@ t_stack	*stack_new_node(int nb)
 	return (new);
 }
 
-// iterate over the whole stack and checks for each element->nb if it exist more than once
-
-int check_duplicates(t_stack **stack)
+int	check_duplicates(t_stack **stack)
 {
-    t_stack *current;
-    t_stack *check;
+	t_stack	*current;
+	t_stack	*check;
 
-    current = *stack;
-    while (current)
-    {
-        check = current->next;
-        while (check)
-        {
-            if (current->nb == check->nb)
-                return (0);
-            check = check->next;
-        }
-        current = current->next;
-    }
-    return (1);
+	current = *stack;
+	while (current)
+	{
+		check = current->next;
+		while (check)
+		{
+			if (current->nb == check->nb)
+				return (0);
+			check = check->next;
+		}
+		current = current->next;
+	}
+	return (1);
 }
 
 // checks if args are correct and if so declare and initialize a stack list
@@ -103,6 +101,6 @@ int	stack_init(t_stack **stack_a, char **av)
 		i++;
 	}
 	if (!check_duplicates(stack_a))
-		return (0);	
+		return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 13:40:13 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/10 13:01:35 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/13 14:45:41 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	print_error(void)
 {
-	write(STDERR_FILENO, "Error\n", 6);
+	write(2, "Error\n", 6);
 }
