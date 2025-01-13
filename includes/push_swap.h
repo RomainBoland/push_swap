@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rboland <rboland@student.s19.be>           +#+  +:+       +#+        */
+/*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:53:01 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/12 16:26:08 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/13 14:16:08 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,17 @@
 # define PUSH_SWAP_H
 
 # include "../libft/includes/libft.h"
+# include <stdbool.h>
 
 typedef struct s_stack
 {
     int             nb;
-    int             index;      // for final sorted position
-    int             pos;        // current position in stack
-    int             target_pos; // where it needs to go
-    int             cost_a;     
-    int             cost_b;
+    int             current_pos;
+    int             final_index;
+    int             push_price;
+    bool            above_medium;
+    bool            cheapest;
+    struct s_stack  *target_node;
     struct s_stack  *next;
 } t_stack;
 
@@ -57,17 +59,18 @@ void	sort_three(t_stack **stack_a);
 void	sort_stack(t_stack **stack_a, t_stack **stack_b);
 
 // sort_large_moves.c
-t_stack *get_cheapest(t_stack **b);
-void do_move(t_stack **a, t_stack **b, int cost_a, int cost_b);
+void move_nodes(t_stack **a, t_stack **b);
+t_stack *get_cheapest_node(t_stack *stack);
+void finish_rotation(t_stack **stack, t_stack *top_node, char stack_name);
 
 // sort_large_utils.c
-void get_position(t_stack **stack);
-int get_target_pos(t_stack **a, int b_idx);
-void get_cost(t_stack **a, t_stack **b);
-void index_stack(t_stack **stack);
+void set_current_position(t_stack *stack);
+void set_price(t_stack *a, t_stack *b);
+void set_cheapest(t_stack *b);
+void init_nodes(t_stack *a, t_stack *b);
 
 // sort_large.c
-void 	sort_large(t_stack **stack_a, t_stack **stack_b);
+void sort_large(t_stack **a, t_stack **b);
 
 // stack operations
 void	swap_a(t_stack **stack_a);

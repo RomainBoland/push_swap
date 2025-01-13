@@ -11,89 +11,73 @@
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
+#include "../../includes/push_swap.h"
 
-static int get_total_cost(int cost_a, int cost_b)
+static void rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
 {
-    if (cost_a < 0)
-        cost_a = -cost_a;
-    if (cost_b < 0)
-        cost_b = -cost_b;
-    return (cost_a + cost_b);
-}
-
-t_stack *get_cheapest(t_stack **b)
-{
-    t_stack *tmp;
-    t_stack *cheapest;
-    int     min_cost;
-    int     cost;
-
-    tmp = *b;
-    cheapest = tmp;
-    min_cost = get_total_cost(tmp->cost_a, tmp->cost_b);
-    while (tmp)
-    {
-        cost = get_total_cost(tmp->cost_a, tmp->cost_b);
-        if (cost < min_cost)
-        {
-            min_cost = cost;
-            cheapest = tmp;
-        }
-        tmp = tmp->next;
-    }
-    return (cheapest);
-}
-
-static void do_rotate_both(t_stack **a, t_stack **b, int *cost_a, int *cost_b)
-{
-    while (*cost_a > 0 && *cost_b > 0)
+    while (*a != cheapest_node->target_node && *b != cheapest_node)
     {
         rotate_r(a, b);
-        (*cost_a)--;
-        (*cost_b)--;
     }
+    set_current_position(*a);
+    set_current_position(*b);
 }
 
-static void do_rev_rotate_both(t_stack **a, t_stack **b, int *cost_a, int *cost_b)
+static void reverse_rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
 {
-    while (*cost_a < 0 && *cost_b < 0)
+    while (*a != cheapest_node->target_node && *b != cheapest_node)
     {
         r_rotate_r(a, b);
-        (*cost_a)++;
-        (*cost_b)++;
     }
+    set_current_position(*a);
+    set_current_position(*b);
 }
 
-static void finish_rotation(t_stack **stack, int *cost, char stack_name)
+void finish_rotation(t_stack **stack, t_stack *top_node, char stack_name)
 {
-    while (*cost)
+    while (*stack != top_node)
     {
-        if (*cost > 0)
+        if (stack_name == 'a')
         {
-            if (stack_name == 'a')
+            if (top_node->above_medium)
                 rotate_a(stack);
             else
-                rotate_b(stack);
-            (*cost)--;
-        }
-        else
-        {
-            if (stack_name == 'a')
                 r_rotate_a(stack);
+        }
+        else if (stack_name == 'b')
+        {
+            if (top_node->above_medium)
+                rotate_b(stack);
             else
                 r_rotate_b(stack);
-            (*cost)++;
         }
     }
 }
 
-void do_move(t_stack **a, t_stack **b, int cost_a, int cost_b)
+// Finds and returns the cheapest node in stack b
+t_stack *get_cheapest_node(t_stack *stack)
 {
-    if (cost_a > 0 && cost_b > 0)
-        do_rotate_both(a, b, &cost_a, &cost_b);
-    else if (cost_a < 0 && cost_b < 0)
-        do_rev_rotate_both(a, b, &cost_a, &cost_b);
-    finish_rotation(a, &cost_a, 'a');
-    finish_rotation(b, &cost_b, 'b');
+    if (!stack)
+        return NULL;
+    while (stack)
+    {
+        if (stack->cheapest)
+            return (stack);
+        stack = stack->next;
+    }
+    return NULL;
+}
+
+void move_nodes(t_stack **a, t_stack **b)
+{
+    t_stack *cheapest_node;
+
+    cheapest_node = get_cheapest_node(*b);
+    if (cheapest_node->above_medium && cheapest_node->target_node->above_medium)
+        rotate_both(a, b, cheapest_node);
+    else if (!cheapest_node->above_medium && !cheapest_node->target_node->above_medium)
+        reverse_rotate_both(a, b, cheapest_node);
+    finish_rotation(b, cheapest_node, 'b');
+    finish_rotation(a, cheapest_node->target_node, 'a');
     push_a(a, b);
 }

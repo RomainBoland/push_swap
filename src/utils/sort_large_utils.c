@@ -12,143 +12,116 @@
 
 #include "../../includes/push_swap.h"
 
-void get_position(t_stack **stack)
-{
-    t_stack *tmp;
-    int     i;
+#include "../../includes/push_swap.h"
 
-    tmp = *stack;
+void set_current_position(t_stack *stack)
+{
+    int i;
+    int centerline;
+
     i = 0;
-    while (tmp)
+    if (!stack)
+        return;
+    centerline = stack_size(stack) / 2;
+    while (stack)
     {
-        tmp->pos = i;
-        tmp = tmp->next;
+        stack->current_pos = i;
+        stack->above_medium = (i <= centerline);
+        stack = stack->next;
         i++;
     }
 }
 
-static int find_closest_bigger(t_stack **a, int b_idx)
+static void set_target_node(t_stack *a, t_stack *b)
 {
-    t_stack *tmp;
-    int     target_idx;
-    int     target_pos;
+    t_stack *current_a;
+    t_stack *target_node;
+    long best_match_index;
 
-    tmp = *a;
-    target_idx = INT_MAX;
-    target_pos = 0;
-    while (tmp)
+    while (b)
     {
-        if (tmp->index > b_idx && tmp->index < target_idx)
+        best_match_index = LONG_MAX;
+        current_a = a;
+        while (current_a)
         {
-            target_idx = tmp->index;
-            target_pos = tmp->pos;
+            if (current_a->nb > b->nb && current_a->nb < best_match_index)
+            {
+                best_match_index = current_a->nb;
+                target_node = current_a;
+            }
+            current_a = current_a->next;
         }
-        tmp = tmp->next;
-    }
-    return (target_idx == INT_MAX ? -1 : target_pos);
-}
-
-static int find_smallest_pos(t_stack **a)
-{
-    t_stack *tmp;
-    int     smallest_idx;
-    int     smallest_pos;
-
-    tmp = *a;
-    smallest_idx = INT_MAX;
-    smallest_pos = 0;
-    while (tmp)
-    {
-        if (tmp->index < smallest_idx)
+        if (best_match_index == LONG_MAX)
         {
-            smallest_idx = tmp->index;
-            smallest_pos = tmp->pos;
+            // Find smallest in a as target
+            b->target_node = a;
+            current_a = a->next;
+            while (current_a)
+            {
+                if (current_a->nb < b->target_node->nb)
+                    b->target_node = current_a;
+                current_a = current_a->next;
+            }
         }
-        tmp = tmp->next;
-    }
-    return (smallest_pos);
-}
-
-int get_target_pos(t_stack **a, int b_idx)
-{
-    int target_pos;
-
-    target_pos = find_closest_bigger(a, b_idx);
-    if (target_pos == -1)
-        target_pos = find_smallest_pos(a);
-    return (target_pos);
-}
-
-static void calculate_stack_cost(int pos, int size, int *cost)
-{
-    *cost = pos;
-    if (pos > size / 2)
-        *cost = -(size - pos);
-}
-
-void get_cost(t_stack **a, t_stack **b)
-{
-    t_stack *tmp;
-    int     size_a;
-    int     size_b;
-
-    tmp = *b;
-    size_a = stack_size(*a);
-    size_b = stack_size(*b);
-    while (tmp)
-    {
-        calculate_stack_cost(tmp->pos, size_b, &tmp->cost_b);
-        calculate_stack_cost(tmp->target_pos, size_a, &tmp->cost_a);
-        tmp = tmp->next;
+        else
+            b->target_node = target_node;
+        b = b->next;
     }
 }
 
-static int find_next_min(t_stack *stack, int previous_min)
+void set_price(t_stack *a, t_stack *b)
 {
-    int     min;
-    t_stack *tmp;
-    int     found_min;
+    int len_a;
+    int len_b;
 
-    tmp = stack;
-    found_min = 0;
-    min = INT_MAX;
-    while (tmp)
+    len_a = stack_size(a);
+    len_b = stack_size(b);
+    while (b)
     {
-        if (tmp->nb < min && tmp->nb > previous_min)
+        b->push_price = b->current_pos;
+        if (!b->above_medium)
+            b->push_price = len_b - b->current_pos;
+        if (b->target_node->above_medium)
+            b->push_price += b->target_node->current_pos;
+        else
+            b->push_price += len_a - b->target_node->current_pos;
+        b = b->next;
+    }
+}
+
+void set_cheapest(t_stack *b)
+{
+    t_stack *current;
+    long min_price;
+
+    if (!b)
+        return;
+    current = b;
+    min_price = LONG_MAX;
+    while (current)
+    {
+        current->cheapest = false;
+        if (current->push_price < min_price)
+            min_price = current->push_price;
+        current = current->next;
+    }
+    current = b;
+    while (current)
+    {
+        if (current->push_price == min_price)
         {
-            min = tmp->nb;
-            found_min = 1;
-        }
-        tmp = tmp->next;
-    }
-    if (!found_min)
-        return (INT_MAX);
-    return (min);
-}
-
-void index_stack(t_stack **stack)
-{
-    t_stack *tmp;
-    int     index;
-    int     previous_min;
-    int     current_min;
-
-    index = 0;
-    previous_min = INT_MIN;
-    tmp = *stack;
-    while (tmp)
-    {
-        current_min = find_next_min(*stack, previous_min);
-        if (current_min == INT_MAX)
+            current->cheapest = true;
             break;
-        tmp = *stack;
-        while (tmp)
-        {
-            if (tmp->nb == current_min)
-                tmp->index = index;
-            tmp = tmp->next;
         }
-        previous_min = current_min;
-        index++;
+        current = current->next;
     }
+}
+
+void init_nodes(t_stack *a, t_stack *b)
+{
+    set_current_position(a);
+    set_current_position(b);
+    set_target_node(a, b);
+    set_price(a, b);
+    set_cheapest(b);
 }
