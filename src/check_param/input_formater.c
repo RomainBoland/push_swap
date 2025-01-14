@@ -23,7 +23,7 @@ static int	parse_argv(char **argv)
 		j = 0;
 		while (argv[i][j])
 		{
-			if (argv[i][j] == "'" || argv[i][j] == "\'")
+			if (argv[i][j] == '"' || argv[i][j] == '\'')
 				return (0);
 			j++;
 		}
