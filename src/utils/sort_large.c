@@ -6,7 +6,7 @@
 /*   By: rboland <rboland@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:20:20 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/13 20:38:59 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/15 11:36:19 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,34 +32,11 @@ static t_stack	*find_smallest(t_stack *stack)
 	return (smallest_node);
 }
 
-static void	handle_five(t_stack **a, t_stack **b)
-{
-	int	len_a;
-
-	len_a = stack_size(*a);
-	while (len_a-- > 3)
-	{
-		init_nodes(*a, *b);
-		push_b(a, b);
-	}
-	sort_three(a);
-	while (*b)
-	{
-		init_nodes(*a, *b);
-		move_nodes(a, b);
-	}
-}
-
 static void	sort_initial_large(t_stack **a, t_stack **b)
 {
 	int	len_a;
 
 	len_a = stack_size(*a);
-	if (len_a == 5)
-	{
-		handle_five(a, b);
-		return ;
-	}
 	while (len_a > 3)
 	{
 		push_b(a, b);
