@@ -6,11 +6,16 @@
 /*   By: rboland <rboland@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:20:20 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/15 11:36:19 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/15 11:43:14 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
+
+/*	Simpple function to find the smallest 
+*	nb variable in an entire stack, returns
+*	a pointer to the node
+*/
 
 static t_stack	*find_smallest(t_stack *stack)
 {
@@ -32,6 +37,13 @@ static t_stack	*find_smallest(t_stack *stack)
 	return (smallest_node);
 }
 
+/*	Send all elements of stack a but 3
+*	Sort the 3 remaining in stack a
+*	Calls init_nodes and move an element with
+*	move_nodes until nothing is left in 
+*	stack b
+*/
+
 static void	sort_initial_large(t_stack **a, t_stack **b)
 {
 	int	len_a;
@@ -50,6 +62,11 @@ static void	sort_initial_large(t_stack **a, t_stack **b)
 	}
 }
 
+/*	Since everything should be sorted at this point
+*	We take note of every node's position and then
+*	find the smallest and rotate it to the top
+*/
+
 static void	position_smallest(t_stack **a)
 {
 	t_stack	*smallest;
@@ -67,6 +84,11 @@ static void	position_smallest(t_stack **a)
 			r_rotate_a(a);
 	}
 }
+
+/*	Calls main sorting function, sort_initial_large()
+*	to sort the tab and position_smallest to rotate the 
+*	smallest to the top
+*/
 
 void	sort_large(t_stack **a, t_stack **b)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rboland <romain.boland@hotmail.com>        +#+  +:+       +#+        */
+/*   By: rboland <rboland@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 13:17:31 by rboland           #+#    #+#             */
-/*   Updated: 2025/01/14 13:08:13 by rboland          ###   ########.fr       */
+/*   Updated: 2025/01/15 12:04:32 by rboland          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,10 @@ t_stack	*stack_new_node(int nb)
 	new->next = NULL;
 	return (new);
 }
+
+/*	Checks for non unique nb 
+*	returns 0 if it finds a duplicate
+*/
 
 int	check_duplicates(t_stack **stack)
 {

@@ -12,6 +12,12 @@
 
 #include "../../includes/push_swap.h"
 
+/*	initialize for each element of a stack
+*	the current_pos in the stack and
+*	a bool to know if it is above or below
+*	the median
+*/
+
 void	set_current_position(t_stack *stack)
 {
 	int	i;
@@ -29,6 +35,10 @@ void	set_current_position(t_stack *stack)
 		i++;
 	}
 }
+
+/*	Parse entire stack a to find the best_match for 
+*	a given b node. The best match is the closest bigger nb
+*/
 
 static t_stack	*find_target_match(
 		t_stack *a, t_stack *b, long *best_match_index)
@@ -49,6 +59,12 @@ static t_stack	*find_target_match(
 	}
 	return (target_node);
 }
+
+/*	Goes through each element in b and find the target node in a
+*	First calls find_target_match() for a potential closest bigger
+*	if none is found it means that b->nb is bigger than each a->nb.
+*	It then search for the smallest a->nb wich will be the target_node
+*/
 
 static void	set_target_node(t_stack *a, t_stack *b)
 {
